@@ -1,0 +1,43 @@
+
+
+#QUANTAS VEZES CADA CURSO FOI ASSITIDO E QUAIS SÃO ESSES CURSOS?
+
+select cursos.nome,count(cursos_assistidos.id_curso)
+from cursos inner join cursos_assistidos
+on cursos_assistidos.id_curso = cursos.id_curso
+group by cursos.nome
+order by count(cursos_assistidos.id_curso);
+
+
+
+#QUANTOS CURSOS FORAM ASSISTIDOS NO ANO DE 2020 E QUAIS FORAM ESSES CURSOS?
+
+select cursos.nome,count(cursos_assistidos.id_curso)
+from cursos inner join cursos_assistidos
+on cursos_assistidos.id_curso = cursos.id_curso
+where cursos_assistidos.data_curso between '2020-01-01' and '2020-12-31'
+group by cursos.nome
+order by count(cursos_assistidos.id_curso);
+
+
+
+#QUANTAS MULHERES FIZERAM OS CURSOS E QUAIS FORAM ELES? 
+
+select c.nome,count(c_a.id_curso)
+from cursos_assistidos as c_a 
+join cursos as c
+on c_a.id_curso = c.id_curso
+join alunos as a
+on c_a.id_aluno = a.id_aluno
+where a.sexo = 'F'
+group by c.nome;
+
+
+
+#EM QUAIS PAÍSES O CURSO É ASSISTIDO?
+
+select país, count(id_aluno)
+from alunos
+group by país;
+
+
